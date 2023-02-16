@@ -1,10 +1,5 @@
-let path = require("path");
+
 module.exports = {
-    entry: "./src/index.js",
-    output: {
-        path: path.join(__dirname, "dist", "assets"),
-        filename: "index.js",
-    },
     module: {
         rules: [
             {
@@ -14,4 +9,5 @@ module.exports = {
             },
         ],
     },
+    devtool: 'source-map',
 };
