@@ -1,0 +1,30 @@
+name: Build
+
+on: push
+
+jobs:
+  release:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm install
+      - run: npm run build
+      - run: npm run pack
+      - uses: polyseam/get-version-from-package-json@v.1.0.0
+        id: version
+        with:
+          path-to-file: "package.json"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.os }}-${{steps.version.outputs.version}}
+          path: release/ceditor-${{steps.version.outputs.version}}.tar.gz
+
+
