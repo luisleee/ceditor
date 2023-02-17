@@ -39,8 +39,7 @@
             "node_modules/",
             "package.json"
         ],
-        "output" :
-        ,
+        "artifactName": "ceditor.${ext}",
         "mac": {
             "target": [
                 "tar.gz"
