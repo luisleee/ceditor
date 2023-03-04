@@ -1,9 +1,8 @@
 import React from "react";
-import { render } from "react-dom";
-import Words from "./components/Words";
+import { createRoot } from "react-dom/client";
+import App from "./components/App";
 import { ipcRenderer } from "electron";
 
-const f = () => {
-    ipcRenderer.invoke("click").catch();
-};
-render(<Words words="Aaaaaa" c={f} />, document.getElementById("react-root"));
+const container = document.getElementById("react-root");
+const root = createRoot(container);
+root.render(<App />);

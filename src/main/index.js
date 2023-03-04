@@ -12,10 +12,10 @@ function createWindow() {
             contextIsolation: false
         },
         backgroundColor: "#333544",
-        minWidth: 450,
-        minHeight: 350,
-        height: 350,
-        width: 450,
+        minWidth: 750,
+        minHeight: 550,
+        width: 1500,
+        height: 1100,
     });
     window.loadFile("dist/renderer/index.html").catch(console.error);
     window.on("close", () => (window = null));

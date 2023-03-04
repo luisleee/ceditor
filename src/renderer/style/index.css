@@ -1,0 +1,69 @@
+body,
+#react-root {
+    margin: 0;
+    border: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: aliceblue;
+}
+
+#react-root {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#chains {
+    flex-grow: 2;
+    height: 40%;
+    width: 100%;
+    border: 2px solid black;
+}
+
+#bottom-pane {
+    flex-grow: 3;
+    height: 60%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+#chain-item-list {
+    flex-grow: 1;
+    height: 100%;
+    width: 20%;
+    border: 2px solid black;
+    overflow-y: scroll;
+}
+
+#item-editor {
+    flex-grow: 4;
+    height: 100%;
+    width: 80%;
+    padding: 10px;
+    border: 2px solid black;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 5px;
+}
+
+li:hover {
+    background-color: antiquewhite;
+}
+
+li.selected {
+    background-color: aquamarine;
+}
+
+#add-item {
+    border: dotted 2px black;
+    text-align: center;
+}
