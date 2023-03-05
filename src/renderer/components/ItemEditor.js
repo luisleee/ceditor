@@ -1,5 +1,7 @@
 import React from "react";
-export default function ItemEditor({ item }) {
+import { useChains } from "./Chains-hook";
+export default function ItemEditor() {
+    const { item } = useChains();
     return (
         <div id="item-editor">
             <h1>Item Editor</h1>

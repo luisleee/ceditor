@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import ChainItem from "./ChainItem";
-export default function ChainItemList({ items, onSelect, onAdd, chainName }) {
+import { useChains } from "./Chains-hook";
+export default function ChainItemList() {
     const [selected, setSelected] = useState(null);
-    function onClick(idx) {
+    const { chain, selectItem, addItem } = useChains();
+    const items = chain?.items;
+    const chainName = chain?.id;
+    const onClick = (idx) => {
         setSelected(idx);
-        onSelect(idx);
-    }
+        selectItem(idx);
+    };
     return (
         <div id="chain-item-list">
             {!items ? (
@@ -28,7 +32,7 @@ export default function ChainItemList({ items, onSelect, onAdd, chainName }) {
                                 );
                             })
                         )}
-                        <li id="add-item" onClick={onAdd}>
+                        <li id="add-item" onClick={addItem}>
                             add item
                         </li>
                     </ul>
