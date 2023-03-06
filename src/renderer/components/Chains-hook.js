@@ -19,7 +19,7 @@ export default function ChainsProvider({ children, initialChains }) {
     };
 
     const addChain = (id) => {
-        setChains(chainsRef.current.concat([{ id, items: [] }]));
+        setChains(chainsRef.current.concat([{ id, name: id, items: [] }]));
     };
 
     const deleteChain = (id) => {
@@ -47,17 +47,39 @@ export default function ChainsProvider({ children, initialChains }) {
         const newItems = chainRef.current.items.concat([{ type: "none" }]);
         updateChain({ ...chainRef.current, items: newItems });
     };
+
+    const updateItem = (newItem) => {
+        const newItems = chainRef.current.items.map((item) =>
+            item !== itemRef.current ? item : newItem
+        );
+        setItem(newItem);
+        updateChain({ ...chainRef.current, items: newItems });
+    };
+    const deleteItem = () => {
+        const newItems = chainRef.current.items.filter(
+            (item) => item !== itemRef.current
+        );
+        setItem(null);
+        updateChain({ ...chainRef.current, items: newItems });
+    };
+
     return (
         <ChainsContext.Provider
             value={{
                 chains,
                 chain,
                 item,
+                chainsRef,
+                chainRef,
+                itemRef,
                 selectChain,
                 addChain,
+                updateChain,
                 deleteChain,
                 selectItem,
                 addItem,
+                updateItem,
+                deleteItem,
             }}
         >
             {children}
