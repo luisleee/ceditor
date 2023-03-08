@@ -19,7 +19,8 @@ export default function ChainsProvider({ children, initialChains }) {
     };
 
     const addChain = (id) => {
-        setChains(chainsRef.current.concat([{ id, name: id, items: [] }]));
+        const newChain = { id, name: id, items: [], next: {} };
+        setChains(chainsRef.current.concat([newChain]));
     };
 
     const deleteChain = (id) => {
@@ -31,7 +32,8 @@ export default function ChainsProvider({ children, initialChains }) {
         );
     };
 
-    const updateChain = (newChain) => {
+    const updateChain = (patch) => {
+        const newChain = { ...chainRef.current, ...patch };
         setChain(newChain);
         const newChains = chainsRef.current.map((c) => {
             return c.id == newChain.id ? newChain : c;
@@ -45,22 +47,23 @@ export default function ChainsProvider({ children, initialChains }) {
 
     const addItem = () => {
         const newItems = chainRef.current.items.concat([{ type: "none" }]);
-        updateChain({ ...chainRef.current, items: newItems });
+        updateChain({ items: newItems });
     };
 
-    const updateItem = (newItem) => {
+    const updateItem = (patch) => {
+        const newItem = { ...itemRef.current, ...patch };
         const newItems = chainRef.current.items.map((item) =>
             item !== itemRef.current ? item : newItem
         );
         setItem(newItem);
-        updateChain({ ...chainRef.current, items: newItems });
+        updateChain({ items: newItems });
     };
     const deleteItem = () => {
         const newItems = chainRef.current.items.filter(
             (item) => item !== itemRef.current
         );
         setItem(null);
-        updateChain({ ...chainRef.current, items: newItems });
+        updateChain({ items: newItems });
     };
 
     return (
@@ -69,11 +72,10 @@ export default function ChainsProvider({ children, initialChains }) {
                 chains,
                 chain,
                 item,
-                chainsRef,
-                chainRef,
-                itemRef,
+                setChains,
                 selectChain,
                 addChain,
+                setChain,
                 updateChain,
                 deleteChain,
                 selectItem,

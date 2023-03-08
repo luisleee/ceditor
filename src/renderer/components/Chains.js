@@ -51,10 +51,28 @@ export default function Chain() {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-    const { selectChain, addChain } = useChains();
+    const { setChains, chain, selectChain, addChain } =
+        useChains();
 
     const onConnect = (params) => {
         setEdges((eds) => addEdge({ ...params, ...edgeDefaults }, eds));
+        const { source, target } = params;
+        setChains((chs) =>
+            chs.map((ch) =>
+                ch.id !== source
+                    ? ch
+                    : {
+                          ...ch,
+                          next: {
+                              [target]: { options: {} },
+                              ...ch.next,
+                          },
+                      }
+            )
+        );
+        if (chain?.id === source) {
+            selectChain(chain.id);
+        }
     };
 
     const onNodeClick = (_, node) => {

@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useReactFlow } from "reactflow";
 import ChainItem from "./ChainItem";
 import { useChains } from "./Chains-hook";
-export default function ChainItemList() {
-    const [selected, setSelected] = useState(null);
-    const { chain, chainRef, updateChain, selectItem, addItem } = useChains();
+export default function ChainItemList({ editNext }) {
     const inputRef = useRef(null);
+    const [selected, setSelected] = useState(null);
+    const { chain, updateChain, selectItem, addItem } = useChains();
     const { setNodes } = useReactFlow();
 
     const items = chain?.items;
@@ -30,7 +30,7 @@ export default function ChainItemList() {
                     : { ...n, data: { ...n.data, label: name } }
             )
         );
-        updateChain({ ...chainRef.current, name });
+        updateChain({ name });
     };
 
     return (
@@ -42,21 +42,28 @@ export default function ChainItemList() {
                     <p>
                         chain:
                         <input type="text" ref={inputRef} onChange={setLabel} />
+                        <button onClick={() => editNext(true)}>
+                            edit next
+                        </button>
+                        <button onClick={() => editNext(false)}>
+                            edit item
+                        </button>
                     </p>
-                    <ul>
+                    <ul id="item-list">
                         {items.length == 0 ? (
                             <li>no item</li>
                         ) : (
-                            items.map(function (item, index) {
-                                return (
-                                    <ChainItem
-                                        key={index}
-                                        onClick={() => onClick(index)}
-                                        selected={index == selected}
-                                        {...{ index, type: item.type }}
-                                    ></ChainItem>
-                                );
-                            })
+                            items.map((item, index) => (
+                                <ChainItem
+                                    key={index}
+                                    onClick={() => {
+                                        editNext(false);
+                                        onClick(index);
+                                    }}
+                                    selected={index == selected}
+                                    {...{ index, type: item.type }}
+                                ></ChainItem>
+                            ))
                         )}
                         <p id="add-item" onClick={addItem}>
                             + add item

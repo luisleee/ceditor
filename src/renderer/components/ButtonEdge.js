@@ -1,5 +1,6 @@
 import React from "react";
 import { getBezierPath, useEdges, useReactFlow } from "reactflow";
+import { useChains } from "./Chains-hook";
 
 const foreignObjectSize = 40;
 
@@ -23,10 +24,27 @@ export default function CustomEdge({
         targetPosition,
     });
 
-    const { setEdges } = useReactFlow();
+    const { getEdges, setEdges } = useReactFlow();
+    const { chain, setChains, selectChain } = useChains();
+    const deleteProp = (prop, { [prop]: _, ...rest }) => rest;
     const onEdgeClick = (evt, id) => {
         evt.stopPropagation();
+
+        const { source, target } = getEdges().find((e) => e.id === id);
         setEdges((eds) => eds.filter((e) => e.id !== id));
+        setChains((chs) =>
+            chs.map((ch) =>
+                ch.id !== source
+                    ? ch
+                    : {
+                          ...ch,
+                          next: deleteProp(target, ch.next),
+                      }
+            )
+        );
+        if (chain?.id === source) {
+            selectChain(chain.id);
+        }
     };
 
     return (

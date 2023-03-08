@@ -38,12 +38,13 @@ body,
     overflow-y: scroll;
 }
 
-#item-editor {
+#main-editor {
     flex-grow: 4;
     height: 100%;
     width: 80%;
     padding: 10px;
     border: 2px solid black;
+    overflow-y: scroll;
 }
 
 ul {
@@ -53,6 +54,9 @@ ul {
 
 li {
     padding: 5px;
+}
+
+#itemlist li {
     display: flex;
     justify-content: space-between;
 }
@@ -65,11 +69,13 @@ li.selected {
     background-color: aquamarine;
 }
 
-#add-item {
+#add-item,
+#add-req {
     border: dotted 2px black;
     text-align: center;
 }
-#add-item:hover {
+#add-item:hover,
+#add-req:hover {
     background-color: antiquewhite;
 }
 
@@ -91,6 +97,12 @@ li.selected {
 }
 .item-delete {
     width: 15%;
+}
+
+.next-requirements {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 /* edgebutton */

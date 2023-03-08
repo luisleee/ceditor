@@ -1,9 +1,22 @@
 import React from "react";
 import { useChains } from "./Chains-hook";
+
+import None from "./Item/None";
+import Dialog from "./Item/Dialog";
+// Image
+import Music from "./Item/Music";
+import Option from "./Item/Option";
+import Task from "./Item/Task";
+import Map from "./Item/Map";
+import Mind from "./Item/Mind";
+import Symbol from "./Item/Symbol";
+import Transition from "./Item/Transition";
+
+
 export default function ItemEditor() {
-    const { item, itemRef, updateItem } = useChains();
+    const { item, updateItem } = useChains();
     const setType = (type) => {
-        updateItem({ ...itemRef.current, type });
+        updateItem({ type });
     };
 
     const types = [
@@ -18,9 +31,10 @@ export default function ItemEditor() {
         "symbol",
         "transition",
     ];
+
     return (
-        <div id="item-editor">
-            <h1>Item Editor</h1>
+        <>
+            <h1>Item</h1>
             {!item ? (
                 <p>no item selected</p>
             ) : (
@@ -33,15 +47,26 @@ export default function ItemEditor() {
                                     type="radio"
                                     name="type"
                                     value={type}
-                                    defaultChecked={item.type == type}
+                                    checked={item.type == type}
+                                    readOnly
                                     onClick={() => setType(type)}
                                 />
                                 {type}
                             </span>
                         ))}
                     </p>
+                    {item.type == "none" && <None></None>}
+                    {item.type == "dialog" && <Dialog></Dialog>}
+                    {/* image */}
+                    {item.type == "music" && <Music></Music>}
+                    {item.type == "option" && <Option></Option>}
+                    {item.type == "task" && <Task></Task>}
+                    {item.type == "map" && <Map></Map>}
+                    {item.type == "mind" && <Mind></Mind>}
+                    {item.type == "symbol" && <Symbol></Symbol>}
+                    {item.type == "transition" && <Transition></Transition>}
                 </>
             )}
-        </div>
+        </>
     );
 }
