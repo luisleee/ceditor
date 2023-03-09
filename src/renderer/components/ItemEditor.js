@@ -3,7 +3,7 @@ import { useChains } from "./Chains-hook";
 
 import None from "./Item/None";
 import Dialog from "./Item/Dialog";
-// Image
+import Image from "./Item/Image";
 import Music from "./Item/Music";
 import Option from "./Item/Option";
 import Task from "./Item/Task";
@@ -12,12 +12,8 @@ import Mind from "./Item/Mind";
 import Symbol from "./Item/Symbol";
 import Transition from "./Item/Transition";
 
-
 export default function ItemEditor() {
-    const { item, updateItem } = useChains();
-    const setType = (type) => {
-        updateItem({ type });
-    };
+    const { item, itemRef, updateItem } = useChains();
 
     const types = [
         "none",
@@ -47,22 +43,27 @@ export default function ItemEditor() {
                                     type="radio"
                                     name="type"
                                     value={type}
-                                    checked={item.type == type}
+                                    checked={item.type === type}
                                     readOnly
-                                    onClick={() => setType(type)}
+                                    onClick={() => {
+                                        updateItem({
+                                            type,
+                                        });
+                                    }}
                                 />
                                 {type}
                             </span>
                         ))}
                     </p>
+                    <hr />
                     {item.type == "none" && <None></None>}
                     {item.type == "dialog" && <Dialog></Dialog>}
-                    {/* image */}
+                    {item.type == "image" && <Image></Image>}//todo
                     {item.type == "music" && <Music></Music>}
                     {item.type == "option" && <Option></Option>}
                     {item.type == "task" && <Task></Task>}
                     {item.type == "map" && <Map></Map>}
-                    {item.type == "mind" && <Mind></Mind>}
+                    {item.type == "mind" && <Mind></Mind>}//todo
                     {item.type == "symbol" && <Symbol></Symbol>}
                     {item.type == "transition" && <Transition></Transition>}
                 </>

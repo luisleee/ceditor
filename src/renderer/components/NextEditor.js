@@ -57,22 +57,24 @@ export default function NextEditor() {
     return (
         <div>
             <h1>Next</h1>
-            {nexts.map((next) => (
-                <div key={next.id} className="next-requirements">
-                    <h2>{next.name}:</h2>
-                    <p>Requirements:</p>
-                    <p>Options Required:</p>
-                    <ul>
-                        {next.options.length == 0 ? (
-                            <li>no requirement</li>
-                        ) : (
-                            next.options.map(([name, value]) => {
-                                return (
+            {Object.keys(nexts).length === 0 ? (
+                <p>no next</p>
+            ) : (
+                nexts.map((next) => (
+                    <div key={next.id} className="next-requirements">
+                        <h2>{next.name}:</h2>
+                        <p>Requirements:</p>
+                        <p>Options Required:</p>
+                        <ul>
+                            {next.options.length == 0 ? (
+                                <li>no requirement</li>
+                            ) : (
+                                next.options.map(([name, value]) => (
                                     <li key={name}>
                                         {name}:
                                         <input
                                             type="number"
-                                            defaultValue={value}
+                                            value={value}
                                             onChange={(evt) => {
                                                 changeValue(
                                                     next.id,
@@ -89,25 +91,28 @@ export default function NextEditor() {
                                             delete
                                         </button>
                                     </li>
-                                );
-                            })
-                        )}
+                                ))
+                            )}
 
-                        <form
-                            id="add-req"
-                            onSubmit={(evt) => {
-                                evt.preventDefault();
-                                const name = evt.target[0].value;
-                                addOption(next.id, name);
-                                evt.target[0].value = "";
-                            }}
-                        >
-                            <input type="text" name="name" />
-                            <input type="submit" value="+ add requirement" />
-                        </form>
-                    </ul>
-                </div>
-            ))}
+                            <form
+                                className="add-item"
+                                onSubmit={(evt) => {
+                                    evt.preventDefault();
+                                    const name = evt.target[0].value;
+                                    addOption(next.id, name);
+                                    evt.target[0].value = "";
+                                }}
+                            >
+                                <input type="text" name="name" />
+                                <input
+                                    type="submit"
+                                    value="+ add requirement"
+                                />
+                            </form>
+                        </ul>
+                    </div>
+                ))
+            )}
         </div>
     );
 }

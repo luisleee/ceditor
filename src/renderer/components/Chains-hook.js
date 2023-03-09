@@ -50,8 +50,7 @@ export default function ChainsProvider({ children, initialChains }) {
         updateChain({ items: newItems });
     };
 
-    const updateItem = (patch) => {
-        const newItem = { ...itemRef.current, ...patch };
+    const updateItem = (newItem) => {
         const newItems = chainRef.current.items.map((item) =>
             item !== itemRef.current ? item : newItem
         );
@@ -72,6 +71,9 @@ export default function ChainsProvider({ children, initialChains }) {
                 chains,
                 chain,
                 item,
+                chainsRef,
+                chainRef,
+                itemRef,
                 setChains,
                 selectChain,
                 addChain,
@@ -80,6 +82,7 @@ export default function ChainsProvider({ children, initialChains }) {
                 deleteChain,
                 selectItem,
                 addItem,
+                setItem,
                 updateItem,
                 deleteItem,
             }}

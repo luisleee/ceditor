@@ -56,7 +56,7 @@ li {
     padding: 5px;
 }
 
-#itemlist li {
+#item-list li {
     display: flex;
     justify-content: space-between;
 }
@@ -69,13 +69,12 @@ li.selected {
     background-color: aquamarine;
 }
 
-#add-item,
-#add-req {
+.add-item{
     border: dotted 2px black;
     text-align: center;
 }
-#add-item:hover,
-#add-req:hover {
+
+.add-item:hover {
     background-color: antiquewhite;
 }
 

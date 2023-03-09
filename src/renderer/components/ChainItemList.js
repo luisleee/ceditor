@@ -65,7 +65,7 @@ export default function ChainItemList({ editNext }) {
                                 ></ChainItem>
                             ))
                         )}
-                        <p id="add-item" onClick={addItem}>
+                        <p className="add-item" onClick={addItem}>
                             + add item
                         </p>
                     </ul>
