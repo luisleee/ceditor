@@ -16,7 +16,7 @@ export default function Transition() {
                 pattern:
                 <input
                     type="text"
-                    value={item?.pattern}
+                    value={item.pattern || ""}
                     onChange={(evt) => {
                         updateItem({
                             ...itemRef.current,
@@ -29,7 +29,7 @@ export default function Transition() {
                 time:
                 <input
                     type="number"
-                    value={item?.time}
+                    value={item.time || 0}
                     onChange={(evt) => {
                         updateItem({
                             ...itemRef.current,
@@ -43,7 +43,7 @@ export default function Transition() {
                 color:
                 <input
                     type="text"
-                    value={item?.infos?.color}
+                    value={item?.infos?.color || ""}
                     onChange={(evt) => {
                         updateItem({
                             ...itemRef.current,

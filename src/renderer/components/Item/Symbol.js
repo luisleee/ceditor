@@ -9,7 +9,7 @@ export default function Symbol() {
                 symbol:
                 <input
                     type="text"
-                    value={item?.symbol}
+                    value={item.symbol || ""}
                     onChange={(evt) => {
                         updateItem({
                             ...itemRef.current,
@@ -22,7 +22,7 @@ export default function Symbol() {
                 desc:
                 <input
                     type="text"
-                    value={item?.desc}
+                    value={item.desc || ""}
                     onChange={(evt) => {
                         updateItem({
                             ...itemRef.current,

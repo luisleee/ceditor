@@ -2,7 +2,7 @@ import React from "react";
 import { useChains } from "../Chains-hook";
 
 export default function Music() {
-    const { item, updateItem, itemRef} = useChains();
+    const { item, updateItem, itemRef } = useChains();
     const setMusicPiece = (evt) => {
         updateItem({ ...itemRef.current, piece: evt.target.value });
     };
@@ -13,7 +13,7 @@ export default function Music() {
                 <input
                     type="text"
                     onChange={setMusicPiece}
-                    value={item?.piece}
+                    value={item.piece || ""}
                 />
             </p>
         </div>

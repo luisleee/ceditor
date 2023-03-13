@@ -27,7 +27,8 @@ export default function ItemEditor() {
         "symbol",
         "transition",
     ];
-
+    // todo: extract component.
+    // todo: open&save
     return (
         <>
             <h1>Item</h1>
@@ -58,12 +59,12 @@ export default function ItemEditor() {
                     <hr />
                     {item.type == "none" && <None></None>}
                     {item.type == "dialog" && <Dialog></Dialog>}
-                    {item.type == "image" && <Image></Image>}//todo
+                    {item.type == "image" && <Image></Image>}
                     {item.type == "music" && <Music></Music>}
                     {item.type == "option" && <Option></Option>}
                     {item.type == "task" && <Task></Task>}
                     {item.type == "map" && <Map></Map>}
-                    {item.type == "mind" && <Mind></Mind>}//todo
+                    {item.type == "mind" && <Mind></Mind>}
                     {item.type == "symbol" && <Symbol></Symbol>}
                     {item.type == "transition" && <Transition></Transition>}
                 </>

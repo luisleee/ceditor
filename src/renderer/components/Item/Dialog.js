@@ -10,7 +10,7 @@ export default function Dialog() {
                 speaker:
                 <input
                     type="text"
-                    value={item?.speaker}
+                    value={item.speaker || ""}
                     onChange={(evt) => {
                         updateItem({
                             ...itemRef.current,
@@ -23,7 +23,7 @@ export default function Dialog() {
                 line:
                 <input
                     type="text"
-                    value={item?.line}
+                    value={item.line || ""}
                     onChange={(evt) => {
                         updateItem({
                             ...itemRef.current,
@@ -36,7 +36,7 @@ export default function Dialog() {
                 emotion:
                 <input
                     type="number"
-                    value={item?.emotion}
+                    value={item.emotion || 0}
                     onChange={(evt) => {
                         updateItem({
                             ...itemRef.current,

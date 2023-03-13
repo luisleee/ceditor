@@ -35,7 +35,7 @@ export default function Map() {
                         map_name:
                         <input
                             type="text"
-                            value={item?.map_name}
+                            value={item.map_name || ""}
                             onChange={(evt) => {
                                 updateItem({
                                     ...itemRef.current,
@@ -49,7 +49,7 @@ export default function Map() {
                         x:
                         <input
                             type="number"
-                            value={item?.pos[0]}
+                            value={item.pos[0] || 0}
                             onChange={(evt) => {
                                 updateItem({
                                     ...itemRef.current,
@@ -63,7 +63,7 @@ export default function Map() {
                         y:
                         <input
                             type="number"
-                            value={item?.pos[1]}
+                            value={item.pos[1] || 0}
                             onChange={(evt) => {
                                 updateItem({
                                     ...itemRef.current,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useChains } from "../Chains-hook";
 
 export default function Option() {
@@ -40,7 +40,7 @@ export default function Option() {
                 question:
                 <input
                     type="text"
-                    value={item?.question}
+                    value={item.question || ""}
                     onChange={(evt) => {
                         updateItem({
                             ...itemRef.current,
@@ -53,7 +53,7 @@ export default function Option() {
                 name:
                 <input
                     type="text"
-                    value={item?.name}
+                    value={item.name || ""}
                     onChange={(evt) => {
                         updateItem({
                             ...itemRef.current,

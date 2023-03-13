@@ -10,7 +10,7 @@ export default function Task() {
                 name:
                 <input
                     type="text"
-                    value={item?.name}
+                    value={item.name || ""}
                     onChange={(evt) => {
                         updateItem({
                             ...itemRef.current,
@@ -23,7 +23,7 @@ export default function Task() {
                 desc:
                 <input
                     type="text"
-                    value={item?.desc}
+                    value={item.desc || ""}
                     onChange={(evt) => {
                         updateItem({
                             ...itemRef.current,
