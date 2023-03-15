@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import { Handle, Position, NodeToolbar, useReactFlow } from "reactflow";
 import { useChains } from "./Chains-hook";
 
-export default function NodeWithDelete({ data, id }) {
+export default memo(({ data, id }) => {
     const { setNodes, setEdges } = useReactFlow();
     const { chain, setChains, deleteChain, selectChain } = useChains();
     const deleteProp = (prop, { [prop]: _, ...rest }) => rest;
@@ -42,4 +42,4 @@ export default function NodeWithDelete({ data, id }) {
             <Handle type="source" position={Position.Right} />
         </>
     );
-}
+});

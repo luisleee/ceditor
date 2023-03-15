@@ -28,7 +28,7 @@ export default function ItemEditor() {
         "transition",
     ];
     // todo: extract component.
-    // todo: open&save
+    // todo: edit preview
     return (
         <>
             <h1>Item</h1>

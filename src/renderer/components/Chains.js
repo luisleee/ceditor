@@ -14,6 +14,7 @@ import "reactflow/dist/style.css";
 import ButtonEdge from "./ButtonEdge.js";
 import NodeWithDelete from "./NodeWithDelete";
 import { useChains } from "./Chains-hook.js";
+const { ipcRenderer } = require("electron");
 
 const nodeTypes = {
     del: NodeWithDelete,
@@ -38,21 +39,41 @@ const edgeTypes = {
     buttonedge: ButtonEdge,
 };
 
-const initialNodes = [];
-
-const initialEdges = [];
-
-const getId = (() => {
+const [getId, resetId] = (() => {
     let id = 0;
-    return () => id++;
+    return [() => id++, (n = 0) => (id = n)];
 })();
 
 export default function Chain() {
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+    const [nodes, setNodes, onNodesChange] = useNodesState([]);
+    const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
-    const { setChains, chain, selectChain, addChain } =
-        useChains();
+    const {
+        chains,
+        setChains,
+        chain,
+        setChain,
+        selectChain,
+        addChain,
+        setItem,
+    } = useChains();
+
+    ipcRenderer.removeAllListeners();
+    ipcRenderer.on("openFile", (evt, { chains, nodes, edges }) => {
+        setChains(chains);
+        setChain(null);
+        setItem(null);
+
+        const idMax = Math.max(chains.map(({ id }) => id));
+        resetId(idMax + 1);
+
+        setNodes(nodes);
+        setEdges(edges);
+    });
+
+    ipcRenderer.on("saveFile", (evt) => {
+        ipcRenderer.send("saveFile", { chains, nodes, edges });
+    });
 
     const onConnect = (params) => {
         setEdges((eds) => addEdge({ ...params, ...edgeDefaults }, eds));
